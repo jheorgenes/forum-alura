@@ -1,8 +1,7 @@
 package br.com.alura.forumalura.controller.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 import br.com.alura.forumalura.modelo.Topico;
 
 public class TopicoDto {
@@ -32,8 +31,8 @@ public class TopicoDto {
 		return dataCriacao;
 	}
 	
-	// Faz a conversão de uma lista de topicos e retorna um topicoDto
-	public static List<TopicoDto> converter(List<Topico> topicos) { //Utilizando java 8 abaixo para utilizar o Stream e não precisar fazer o loop manualmente
-		return topicos.stream().map(TopicoDto::new).collect(Collectors.toList()); //fazendo um map de topico para topicoDto (chamando o construtor do topicoDto como parametro) e transformando em uma lista com .collect(Collectors.toList())
+	// Faz a conversão de uma pagina de topicos e retorna um topicoDto
+	public static Page<TopicoDto> converter(Page<Topico> topicos) { 
+		return topicos.map(TopicoDto::new); //Pega cada um dos registros que estão dentro da página de topicos e transforme em um TopicoDto
 	}
 }
